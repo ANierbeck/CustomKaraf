@@ -151,7 +151,7 @@
                             org.apache.felix.utils.extender,
                             org.apache.felix.utils.manifest,
                             org.apache.felix.gogo.api,
-                            org.apache.felix.gogo.runtime,
+                            org.apache.felix.gogo.runtime;-split-package:=merge-first,
                             org.apache.felix.gogo.runtime.threadio,
                             org.apache.felix.service.command,
                             org.apache.felix.service.threadio,

@@ -39,13 +39,20 @@ public class Parser {
     int c1;
     int c2;
     int c3;
+    
+    private boolean isExpansionEnabled;
 
     public Parser(String text, int cursor) {
-        this.text = text;
-        this.cursor = cursor;
+        this(text, cursor, true);
     }
 
-    void ws() {
+    public Parser(String text, int cursor, boolean expansionEnabled) {
+    	this.text = text;
+        this.cursor = cursor;
+        this.isExpansionEnabled = expansionEnabled;
+	}
+
+	void ws() {
         // derek: BUGFIX: loop if comment  at beginning of input
         //while (!eof() && Character.isWhitespace(peek())) {
         while (!eof() && (!escaped && Character.isWhitespace(peek()) || current == 0)) {
@@ -226,7 +233,7 @@ public class Parser {
         start = current;
         try {
             char c = next();
-            if (!escaped) {
+            if (!escaped && isExpansionEnabled) {
                 switch (c) {
                     case '{':
                         return text.substring(start, find('}', '{'));
@@ -252,11 +259,11 @@ public class Parser {
                     if (Character.isWhitespace(c) || c == ';' || c == '|' || c == '=') {
                         break;
                     }
-                    else if (c == '{') {
+                    else if (c == '{' && isExpansionEnabled) {
                         next();
                         find('}', '{');
                     }
-                    else if (c == '(') {
+                    else if (c == '(' && isExpansionEnabled) {
                         next();
                         find(')', '(');
                     }

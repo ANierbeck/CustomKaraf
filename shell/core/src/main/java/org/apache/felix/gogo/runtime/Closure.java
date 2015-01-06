@@ -54,7 +54,7 @@ public class Closure implements Function, Evaluate
 
         try
         {
-            program = new Parser(source, isExpansionEnabled()).program();
+            program = new Parser(source, isExpansionEnabled()).program(); //CQL-Handling
         }
         catch (Exception e)
         {
@@ -300,6 +300,7 @@ public class Closure implements Function, Evaluate
         return v;
     }
 
+    //extra handling for CQL-Shell
     private boolean isExpansionEnabled() {
         Object v = session.get("org.apache.felix.gogo.expansion");
         if (v != null) {
@@ -551,7 +552,7 @@ public class Closure implements Function, Evaluate
     {
         List<Token> list = new ArrayList<Token>();
         Map<Token, Token> map = new LinkedHashMap<Token, Token>();
-        (new Parser(array, isExpansionEnabled())).array(list, map);
+        (new Parser(array, isExpansionEnabled())).array(list, map); //CQL-Handling
 
         if (map.isEmpty())
         {

@@ -40,16 +40,17 @@ public class Parser {
     int c2;
     int c3;
     
-    private boolean isExpansionEnabled;
+    private boolean isExpansionEnabled; //CQL-Handling
 
     public Parser(String text, int cursor) {
         this(text, cursor, true);
     }
 
+    //CQL-Handling
     public Parser(String text, int cursor, boolean expansionEnabled) {
     	this.text = text;
         this.cursor = cursor;
-        this.isExpansionEnabled = expansionEnabled;
+        this.isExpansionEnabled = expansionEnabled; //CQL-Handling
 	}
 
 	void ws() {
@@ -233,7 +234,7 @@ public class Parser {
         start = current;
         try {
             char c = next();
-            if (!escaped && isExpansionEnabled) {
+            if (!escaped && isExpansionEnabled) { //CQL-Handling
                 switch (c) {
                     case '{':
                         return text.substring(start, find('}', '{'));
@@ -259,11 +260,11 @@ public class Parser {
                     if (Character.isWhitespace(c) || c == ';' || c == '|' || c == '=') {
                         break;
                     }
-                    else if (c == '{' && isExpansionEnabled) {
+                    else if (c == '{' && isExpansionEnabled) { //CQL-Handling
                         next();
                         find('}', '{');
                     }
-                    else if (c == '(' && isExpansionEnabled) {
+                    else if (c == '(' && isExpansionEnabled) { //CQL-Handling
                         next();
                         find(')', '(');
                     }

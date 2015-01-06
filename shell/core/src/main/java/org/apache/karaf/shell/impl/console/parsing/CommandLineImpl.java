@@ -37,7 +37,7 @@ public class CommandLineImpl implements CommandLine {
         return build(buffer, cursor, true);
     }
     
-	public static CommandLine build(String buffer, int cursor, boolean expansionEnabled) {
+	public static CommandLine build(String buffer, int cursor, boolean expansionEnabled) { //CQL-Handling
 		Parser parser = new Parser(buffer, cursor, expansionEnabled);
         try {
             List<List<List<String>>> program = parser.program();

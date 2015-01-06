@@ -73,6 +73,7 @@ public class Tokenizer
     private final Evaluate evaluate;
     private final boolean inArray;
     private final boolean inQuote;
+    //extra to disable some special handling of brackets etc. needed for CQL-Completion
     private final boolean isExpansionEnabled;
 
     private Type type = Type.NEWLINE;
@@ -95,6 +96,7 @@ public class Tokenizer
     	this(text, evaluate, inQuote, true);
     }
 
+    //This constructor gets the isExpansionEnabled flag for extra handling of a CQL-Like shell
     public Tokenizer(CharSequence text, Evaluate evaluate, boolean inQuote, boolean isExpansionEnabled)
     {
         this.text = text;
@@ -183,7 +185,7 @@ public class Tokenizer
                 case '{':
                 case '(':
                 case '[':
-                	if (isExpansionEnabled) {
+                	if (isExpansionEnabled) { //Disabled for CQL
 	                    value = group();
 	                    getch();
                 	} else {

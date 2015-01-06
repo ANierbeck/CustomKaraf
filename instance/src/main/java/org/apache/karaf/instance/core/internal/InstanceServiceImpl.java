@@ -484,7 +484,11 @@ public class InstanceServiceImpl implements InstanceService {
                 + " -Dkaraf.startLocalConsole=false"
                 + " -Dkaraf.startRemoteShell=true"
                 + " -classpath \"" + classpath.toString() + "\""
-                + " org.apache.karaf.main.Main";
+                + " org.apache.karaf.main.Main server";
+        if (System.getenv("KARAF_REDIRECT") != null && !System.getenv("KARAF_REDIRECT").isEmpty()) {
+            command = command + " >> " + System.getenv("KARAF_REDIRECT");
+        }
+
         LOGGER.debug("Starting instance " + name + " with command: " + command);
         Process process = new ProcessBuilderFactoryImpl().newBuilder()
                 .directory(new File(location))

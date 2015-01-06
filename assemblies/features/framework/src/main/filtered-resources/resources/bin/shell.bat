@@ -95,7 +95,7 @@ if "%KARAF_ETC%" == "" (
 )
 
 set DEFAULT_JAVA_OPTS=
-set DEFAULT_JAVA_DEBUG_OPTS=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005
+set DEFAULT_JAVA_DEBUG_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
 
 rem Support for loading native libraries
 set PATH=%PATH%;%KARAF_BASE%\lib;%KARAF_HOME%\lib
@@ -114,7 +114,7 @@ if not "%JAVA%" == "" goto :Check_JAVA_END
 if "%JAVA_OPTS%" == "" set JAVA_OPTS=%DEFAULT_JAVA_OPTS%
 
 if "%EXTRA_JAVA_OPTS%" == "" goto :KARAF_EXTRA_JAVA_OPTS_END
-    set JAVA_OPTS="%JAVA_OPTS% %EXTRA_JAVA_OPTS%"
+    set JAVA_OPTS=%JAVA_OPTS% %EXTRA_JAVA_OPTS%
 :KARAF_EXTRA_JAVA_OPTS_END
 
 if "%KARAF_DEBUG%" == "" goto :KARAF_DEBUG_END

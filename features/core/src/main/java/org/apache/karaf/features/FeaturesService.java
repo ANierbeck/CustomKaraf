@@ -18,6 +18,7 @@ package org.apache.karaf.features;
 
 import java.net.URI;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -79,6 +80,10 @@ public interface FeaturesService {
 
     Repository getRepository(String repoName) throws Exception;
 
+    Repository getRepository(URI uri) throws Exception;
+
+    String getRepositoryName(URI uri) throws Exception;
+
     void installFeature(String name) throws Exception;
 
     void installFeature(String name, EnumSet<Option> options) throws Exception;
@@ -126,6 +131,10 @@ public interface FeaturesService {
     Feature getFeature(String name, String version) throws Exception;
 
     Feature getFeature(String name) throws Exception;
+
+    Feature[] getFeatures(String name, String version) throws Exception;
+
+    Feature[] getFeatures(String name) throws Exception;
 
     void refreshRepository(URI uri) throws Exception;
 
